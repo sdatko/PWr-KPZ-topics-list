@@ -1,0 +1,6 @@
+*.py[cod]
+.tox/
+__pycache__/
+logos/*
+result.csv
+result.html
