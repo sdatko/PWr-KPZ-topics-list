@@ -1,0 +1,18 @@
+{%- for company_ID, company_name in COMPANIES.items()|sort -%}
+  {%- for project in PROJECTS[company_ID]|sort(attribute='title') -%}
+    {%- for group in range(1, project.groups + 1) -%}
+      {{- company_name -}}
+      {{- '\t' -}}
+      {{- project.title -}}
+      {{- '\t' -}}
+      Grupa {{ group }} / {{ project.groups -}}
+      {{- '\t' -}}
+      {%- if project.reserved -%}
+        wstępnie zajęty
+      {%- else -%}
+        wolny
+      {%- endif -%}
+      {{- '\n' -}}
+    {%- endfor -%}
+  {%- endfor -%}
+{%- endfor -%}

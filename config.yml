@@ -1,0 +1,22 @@
+---
+spreadsheet_id: ''  # TODO
+sheet_id: ''  # TODO
+
+logos_dir: './logos'
+logos_url: 'https://kpz.pwr.edu.pl/wp-content/uploads/2022/02/logotypy/'
+
+templates_dir: './templates'
+csv_template_file: 'groups.csv'
+# html_template_file: 'standalone.html'
+html_template_file: 'just-list.html'
+
+html_output_file: 'result.html'
+csv_output_file: 'result.csv'
+
+# colors:
+#   company_ID_1:
+#     bg: ''
+#     fg: ''
+#   company_ID_2:
+#     bg: ''
+#     fg: ''
