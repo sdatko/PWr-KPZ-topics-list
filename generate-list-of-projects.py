@@ -71,6 +71,10 @@ reader = csv.reader(lines[1:])
 # Process projects
 #
 for row in reader:
+    if len(row) == 13:  # Topic was not verified yet, so do not display it
+        row[13] = 'NIE'
+        row[14] = '0'
+
     # time = row[0]  # Sygnatura czasowa
     # email = row[1]  # Adres e-mail
     # name = row[2]  # Imię i nazwisko
