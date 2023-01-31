@@ -180,18 +180,18 @@
             <p>{{ project.description }}</p>
             <hr />
             <p>
-                <b>Planowane formy współpracy</b>:
+                <b>{% if project.polish_labels %}Planowane formy współpracy{%- else %}Support offered by company{% endif %}</b>:
                 <ul>
                   {% for offer in project.offers %}
                     <li>{{ offer }}</li>
                   {% endfor %}
                 </ul>
             </p>
-            <p><b>Akceptowana wielkość grupy</b>: {{ project.sizes }}</p>
-            <p><b>Dopuszczalny język projektu</b>: {{ project.language }}</p>
-            <p><b>Dostępna liczba grup</b>: {{ project.available }}/{{ project.groups }}</p>
+            <p><b>{% if project.polish_labels %}Akceptowana wielkość grupy{%- else %}Accepted group size{% endif %}</b>: {{ project.sizes }}</p>
+            <p><b>{% if project.polish_labels %}Dopuszczalny język projektu{%- else %}Acceptable project language{% endif %}</b>: {{ project.language }}</p>
+            <p><b>{% if project.polish_labels %}Dostępna liczba grup{%- else %}Available groups{% endif %}</b>: {{ project.available }}/{{ project.groups }}</p>
             <p>
-                <b>Dodatkowe uwagi</b>:<br />
+                <b>{% if project.polish_labels %}Dodatkowe uwagi{%- else %}Additional remarks{% endif %}</b>:<br />
                 {{ project.appendix }}
             </p>
         </div>

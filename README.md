@@ -42,6 +42,7 @@ in the sheet coming from the Google Form:
 - Pre-reserved to a teacher?
 - Shall it be displayed? (*optional*)
 - How many groups still available? (*optional*)
+- What language shall be used for labels? (*optional*)
 
 
 Logos

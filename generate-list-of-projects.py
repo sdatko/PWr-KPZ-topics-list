@@ -54,6 +54,49 @@ def sanitize(text: str) -> str:
 
 
 #
+# Translator
+#
+translations = {
+    'Konsultacje merytoryczne ze strony pracownika firmy.':
+        'Consultations by an employee of the company.',
+    'Nadzór merytoryczny pracownika firmy'
+    ' nad całością lub fragmentami projektu.':
+        'Supervision over the project by an employee of the company.',
+    'Udział pracownika firmy w spotkaniach projektowych.':
+        'Participation of a company employee in project meetings.',
+    'Udostępnienie/sfinansowanie przez firmę'
+    ' niezbędnego sprzętu/oprogramowania.':
+        'Company will provision/finance the necessary hardware/software.',
+    '3 osoby':
+        '3 people',
+    '4 osoby':
+        '4 people',
+    '5 osób':
+        '5 people',
+    '6 osób':
+        '6 people',
+    '7 osób':
+        '7 people',
+    '8 lub więcej osób':
+        '8 or more people',
+    'angielski':
+        'English',
+    'polski':
+        'Polish',
+    '(brak)':
+        '(none)',
+}
+
+
+def translate(text):
+    text = text.replace('&nbsp;', ' ')
+    for i, j in translations.items():
+        text = text.replace(i, j)
+    text = re.sub('[ ]([a-z0-9])[ ]', r' \1&nbsp;', text)
+    return text
+
+
+#
 # Read template
 #
 template_loader = FileSystemLoader(searchpath=TEMPLATES_DIR)
@@ -74,6 +117,8 @@ for row in reader:
     if len(row) == 13:  # Topic was not verified yet, so do not display it
         row[13] = 'NIE'
         row[14] = '0'
+    if len(row) < 16:
+        row[15] = 'PL'
 
     # time = row[0]  # Sygnatura czasowa
     # email = row[1]  # Adres e-mail
@@ -90,6 +135,7 @@ for row in reader:
     # reserved = row[12]  # Przed-rezerwacja
     verified = (row[13] == 'TAK')  # ZWERYFIKOWANY
     available = sanitize(row[14])  # DOSTĘPNE GRUPY
+    polish_labels = (row[15] == 'PL')  # JĘZYK ETYKIET
 
     if verified:
         offers = [sanitize(offer) for offer in offers.split(', ')]
@@ -98,6 +144,12 @@ for row in reader:
 
         if not appendix:
             appendix = '(brak)'
+
+        if not polish_labels:
+            appendix = translate(appendix)
+            language = translate(language)
+            offers = [translate(offer) for offer in offers]
+            sizes = translate(sizes)
 
         company_ID = ''.join(filter(str.isalnum,
                                     company.lower().strip().split()[0]))
@@ -123,6 +175,7 @@ for row in reader:
             'language': language,
             'appendix': appendix,
             'available': available,
+            'polish_labels': polish_labels,
         }
 
         COMPANIES[company_ID] = company
