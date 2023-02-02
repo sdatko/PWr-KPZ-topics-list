@@ -90,11 +90,18 @@
         margin-top: 7.0em;
     }
 
-    {% for company_ID, color in COLORS.items()|sort %}
-    .{{ company_ID }} h4.colors {
-        background-color: {{ color.bg }} !important;
-        color: {{ color.fg }} !important;
+    {% for company_ID, company_settings in SETTINGS.items()|sort %}
+        {%- if 'max-width' in company_settings %}
+    div.topics img.{{ company_ID }} {
+        max-width: {{ company_settings['max-width'] }};
     }
+        {%- endif %}
+        {%- if 'bg' in company_settings and 'fg' in company_settings %}
+    div.topics div.{{ company_ID }} h4.colors {
+        background-color: {{ company_settings.bg }} !important;
+        color: {{ company_settings.fg }} !important;
+    }
+        {%- endif %}
     {% endfor %}
 </style>
 <script language="javascript" type="text/javascript">
@@ -169,7 +176,7 @@
 
 {% for company_ID, company in COMPANIES.items()|sort %}
   {% if company.logo %}
-    <img src="{{ company.logo }}" alt="{{ company.name }}" />
+    <img src="{{ company.logo }}" alt="{{ company.name }}" class="{{ company_ID }}" />
   {% else %}
     <h3>{{ company.name }}</h3>
   {% endif %}

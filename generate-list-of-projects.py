@@ -32,7 +32,7 @@ OUTPUT_FILE = CONFIG.get('html_output_file')
 LOGOS_DIR = CONFIG.get('logos_dir')
 LOGOS_URL = CONFIG.get('logos_url')
 
-COLORS = CONFIG.get('colors', {})
+SETTINGS = CONFIG.get('settings', {})
 COMPANIES = defaultdict(dict)
 PROJECTS = defaultdict(list)
 
@@ -187,7 +187,7 @@ for row in reader:
 with open(OUTPUT_FILE, 'w') as file:
     last_update = str(datetime.now().astimezone().isoformat())
     file.write(template.render(
-        COLORS=COLORS,
+        SETTINGS=SETTINGS,
         COMPANIES=COMPANIES,
         PROJECTS=PROJECTS,
         last_update=last_update,

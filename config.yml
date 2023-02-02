@@ -13,10 +13,11 @@ html_template_file: 'just-list.html'
 html_output_file: 'result.html'
 csv_output_file: 'result.csv'
 
-# colors:
+# settings:
 #   company_ID_1:
 #     bg: ''
 #     fg: ''
+#     max-width: 90%
 #   company_ID_2:
 #     bg: ''
 #     fg: ''
